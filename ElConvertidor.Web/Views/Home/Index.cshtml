@@ -1,9 +1,11 @@
-﻿@{
+﻿@using ElConvertidor.Web.Models
+
+@{
     ViewBag.Title = "Multipage image generator";
 }
 
-<p>Hello world!</p>
-
-<button>Test</button>
-<input type="button" value="Test">
-<input type="submit" value="Test">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype="multipart/form-data" }))
+{
+    <input accept=".bmp, .gif, .jpg, .jpeg" name="file" type="file" />
+    <input type="submit" value="Submit" />
+}
