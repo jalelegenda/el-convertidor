@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElConvertidor.Tests", "ElCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElConvertidor.Web", "ElConvertidor.Web\ElConvertidor.Web.csproj", "{4110BB66-2AA6-4918-BA4A-5C03CB6BA2A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElConvertidor.Core", "ElConvertidor.Core\ElConvertidor.Core.csproj", "{CE770962-40A5-4660-84E4-BE693678799D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElConvertidor.Infrastructure", "ElConvertidor.Infrastructure\ElConvertidor.Infrastructure.csproj", "{C1BAFCAA-758A-4B31-B34C-EBCA200AFF53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{4110BB66-2AA6-4918-BA4A-5C03CB6BA2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4110BB66-2AA6-4918-BA4A-5C03CB6BA2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4110BB66-2AA6-4918-BA4A-5C03CB6BA2A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE770962-40A5-4660-84E4-BE693678799D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE770962-40A5-4660-84E4-BE693678799D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE770962-40A5-4660-84E4-BE693678799D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE770962-40A5-4660-84E4-BE693678799D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1BAFCAA-758A-4B31-B34C-EBCA200AFF53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1BAFCAA-758A-4B31-B34C-EBCA200AFF53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1BAFCAA-758A-4B31-B34C-EBCA200AFF53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1BAFCAA-758A-4B31-B34C-EBCA200AFF53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
