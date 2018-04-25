@@ -23,16 +23,14 @@ namespace ElConvertidor.Web.Controllers
 
         [HttpPost]
         [ActionName("Index")]
-        public ActionResult UploadImages(IEnumerable<HttpPostedFileBase> files)
+        public bool UploadImages(IEnumerable<HttpPostedFileBase> files)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return false;
             }
 
-            var result = _tiffService.ConvertImagesToMultipageTiff(files);
-
-            return File(result, "image/tiff", "image.tif");
+            return _tiffService.ConvertImagesToMultipageTiff(files);
         }
     }
 }

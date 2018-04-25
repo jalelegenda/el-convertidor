@@ -6,6 +6,6 @@ namespace ElConvertidor.Core.Infrastructure
 {
     public interface ITiffService
     {
-        Stream ConvertImagesToMultipageTiff(IEnumerable<HttpPostedFileBase> images);
+        bool ConvertImagesToMultipageTiff(IEnumerable<HttpPostedFileBase> images);
     }
 }

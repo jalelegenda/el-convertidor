@@ -142,7 +142,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +154,10 @@
     <ProjectReference Include="..\ElConvertidor.Core\ElConvertidor.Core.csproj">
       <Project>{ce770962-40a5-4660-84e4-be693678799d}</Project>
       <Name>ElConvertidor.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ElConvertidor.Data\ElConvertidor.Data.csproj">
+      <Project>{4f7c09c2-b17d-4184-88a9-7182083667bf}</Project>
+      <Name>ElConvertidor.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\ElConvertidor.Infrastructure\ElConvertidor.Infrastructure.csproj">
       <Project>{c1bafcaa-758a-4b31-b34c-ebca200aff53}</Project>

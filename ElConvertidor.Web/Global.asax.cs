@@ -27,9 +27,13 @@ namespace ElConvertidor
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+
+        public override void Init()
+        {
+            
         }
     }
 }

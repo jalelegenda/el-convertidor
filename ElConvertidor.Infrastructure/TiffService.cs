@@ -10,7 +10,7 @@ namespace ElConvertidor.Infrastructure
 {
     public class TiffService : ITiffService
     {
-        public Stream ConvertImagesToMultipageTiff(IEnumerable<HttpPostedFileBase> images)
+        public bool ConvertImagesToMultipageTiff(IEnumerable<HttpPostedFileBase> images)
         {
 
             Stream imageStream = new MemoryStream();
@@ -43,7 +43,7 @@ namespace ElConvertidor.Infrastructure
                 imageStream.Position = 0;
             }
 
-            return imageStream;
+            return true;
         }
     }
 }
