@@ -1,0 +1,23 @@
+﻿input[type=file] {
+    display: none;
+}
+
+button:disabled,
+button:disabled:hover,
+button:disabled:active,
+button:disabled:focus,
+input:disabled,
+input:disabled:hover,
+input:disabled:active,
+input:disabled:focus {
+    cursor: not-allowed;
+    opacity: .2;
+}
+
+button.big-btn,
+input[type=button].big-btn,
+input[type=submit].big-btn {
+    font-size: 1.4em;
+    padding: 7px 20px;
+    width: 120px;
+}

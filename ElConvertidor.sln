@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElConvertidor.Tests", "ElConvertidor.Tests\ElConvertidor.Tests.csproj", "{CCE0B56F-35D3-4523-B3B8-8EC5D3BE36C7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElConvertidor.Web", "ElConvertidor.Web\ElConvertidor.Web.csproj", "{4110BB66-2AA6-4918-BA4A-5C03CB6BA2A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElConvertidor.Core", "ElConvertidor.Core\ElConvertidor.Core.csproj", "{CE770962-40A5-4660-84E4-BE693678799D}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CCE0B56F-35D3-4523-B3B8-8EC5D3BE36C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCE0B56F-35D3-4523-B3B8-8EC5D3BE36C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCE0B56F-35D3-4523-B3B8-8EC5D3BE36C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCE0B56F-35D3-4523-B3B8-8EC5D3BE36C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4110BB66-2AA6-4918-BA4A-5C03CB6BA2A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4110BB66-2AA6-4918-BA4A-5C03CB6BA2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4110BB66-2AA6-4918-BA4A-5C03CB6BA2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU

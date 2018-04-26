@@ -53,6 +53,10 @@
     <Compile Include="Contexts\ConversionsContext.cs" />
     <Compile Include="Entities\Conversion.cs" />
     <Compile Include="Entities\InputImage.cs" />
+    <Compile Include="Migrations\201804250909090_Initialize.cs" />
+    <Compile Include="Migrations\201804250909090_Initialize.Designer.cs">
+      <DependentUpon>201804250909090_Initialize.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +65,14 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804250909090_Initialize.resx">
+      <DependentUpon>201804250909090_Initialize.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,22 @@
+﻿h1 {
+    font-size: 5em;
+}
+
+@media all and (max-width: 496px) {
+    h1 {
+        font-size: 2.8em;
+    }
+}
+
+h2 {
+    font-size: 3em;
+}
+
+h3 {
+    font-size: 1.7em;
+}
+
+.panel h3 {
+    padding-top: 20px;
+    margin-bottom: 20px;
+}

@@ -124,10 +124,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Public\css\controls.css" />
+    <Content Include="Public\css\layout.css" />
+    <Content Include="Public\css\typography.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\style.css" />
-    <Content Include="Scripts\index.js" />
+    <Content Include="Public\css\reset.css" />
+    <Content Include="Public\js\index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

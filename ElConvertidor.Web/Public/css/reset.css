@@ -1,37 +1,22 @@
 ﻿html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    height: 100%;
 }
 
 body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    display: flex;
+    height: 100%;
     font: 16px/1 sans-serif;
     margin: 0;
 }
 
-article,
-aside,
-figure,
-footer,
-form,
-h1,
-h2,
-h3,
-header,
-li,
-main,
-nav,
-ol,
-ul,
-section {
-    display: inherit;
-}
-
 a,
 button,
-figure,
+dd,
+dl,
+dt,
 h1,
 h2,
 h3,
@@ -72,7 +57,7 @@ input[type=submit] {
     -webkit-font-smoothing: inherit;
     background: none;
     border: 1px solid;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
     font: inherit;
     margin: 2px;

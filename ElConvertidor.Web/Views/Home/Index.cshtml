@@ -2,12 +2,38 @@
     ViewBag.Title = "Multipage image generator";
 }
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype="multipart/form-data" }))
-{
-    <input accept=".bmp, .gif, .jpg, .jpeg" name="files" type="file" />
-    <input accept=".bmp, .gif, .jpg, .jpeg" name="files" type="file" />
-
-    <input accept=".bmp, .gif, .jpg, .jpeg" name="files" type="file" />
-    <input accept=".bmp, .gif, .jpg, .jpeg" name="files" type="file" />
-    <input type="submit" value="Submit" />
-}
+<section class="container">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "image-upload", enctype = "multipart/form-data" }))
+    {
+        <section class="panel">
+            <h1>Tiff archiver</h1>
+            @*<h3>No images added yet...</h3>*@
+            <table>
+                <tr>
+                    <th>9280jokgs-fs-fsfs-example-file012.jpg</th>
+                    <td><button>Remove</button></td>
+                </tr>
+                <tr>
+                    <th>9280jokgs-fs-fsfs-example-file012.jpg</th>
+                    <td><button>Remove</button></td>
+                </tr>
+                <tr>
+                    <th>9280jok-example-file01266.gif</th>
+                    <td><button>Remove</button></td>
+                </tr>
+                <tr>
+                    <th>923523k-example-file01441256512515123.bmp</th>
+                    <td><button>Remove</button></td>
+                </tr>
+                <tr>
+                    <th>9280jo2222gsk-example-file0131245151.jpg</th>
+                    <td><button>Remove</button></td>
+                </tr>
+            </table>
+        </section>
+        <input accept=".bmp, .gif, .jpg, .jpeg" name="files" type="file" />
+        <input accept=".bmp, .gif, .jpg, .jpeg" name="files" type="file" />
+        <input type="button" class="big-btn" value="Add" />
+        <input class="big-btn" type="submit" value="Archive" disabled/>
+    }
+</section>
