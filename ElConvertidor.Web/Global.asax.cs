@@ -30,10 +30,5 @@ namespace ElConvertidor
             //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
-
-        public override void Init()
-        {
-            
-        }
     }
 }

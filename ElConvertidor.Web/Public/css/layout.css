@@ -16,7 +16,7 @@ main {
 }
 
 section.container {
-    max-width: 600px;
+    max-width: 650px;
     margin-top: 35px;
 }
 
@@ -31,6 +31,7 @@ section.panel {
 /*Tables*/
 
 table {
+    padding-top: 20px;
     width: 100%;
 }
 
@@ -41,16 +42,18 @@ tr {
     white-space: nowrap;
 }
 
-th {
+td.file-name {
     font-weight: normal;
     text-align: left;
     max-width: 120px;
     overflow: hidden;
+    padding-left: 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-td {
+td.control {
+    padding-right: 20px;
     text-align: right;
 }
 

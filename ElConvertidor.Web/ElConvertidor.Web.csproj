@@ -126,11 +126,15 @@
   <ItemGroup>
     <Content Include="Public\css\controls.css" />
     <Content Include="Public\css\layout.css" />
+    <Content Include="Public\css\main.css" />
     <Content Include="Public\css\typography.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Public\css\reset.css" />
-    <Content Include="Public\js\index.js" />
+    <Content Include="Public\dist\main.js" />
+    <Content Include="Public\js\ImageFormViewModel.js" />
+    <Content Include="Public\js\ImageModel.js" />
+    <Content Include="Public\webpack.config.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -166,6 +170,9 @@
       <Project>{c1bafcaa-758a-4b31-b34c-ebca200aff53}</Project>
       <Name>ElConvertidor.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Public\package.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
