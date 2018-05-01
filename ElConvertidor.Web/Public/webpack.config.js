@@ -1,25 +1,48 @@
 ﻿const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const webpack = require('webpack');
+const UglifyJS = require('uglifyjs-webpack-plugin');
+const MiniCssPlugin = require('mini-css-extract-plugin');
+const OptimizeCSS = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-    entry: ['./js/ImageFormViewModel.js'],
+    entry: ['./js/ImageFormViewModel.js', './css/main.css'],
     output: {   
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js'
     },
-    //module: {
-    //    rules: [
-    //        {
-    //            test: /\.css$/,
-    //            use: ExtractTextPlugin.extract({
-    //                fallback: 'style-loader',
-    //                use: 'css-loader'
-    //            })
-    //        }
-    //    ]
-    //},
+    optimization: {
+        minimizer: [
+            new UglifyJS({
+                cache: true,
+                parallel: true,
+                sourceMap: true
+            }),
+            new OptimizeCSS()
+        ]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    //options: {
+                    //    presets: ['@babel/preset-env']
+                    //}
+                }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssPlugin.loader,
+                    'css-loader'
+                ]
+            }
+        ]
+    },
     plugins: [
-        //new ExtractTextPlugin('dist/style.css')
+        new MiniCssPlugin({
+            filename: '[name].css'
+        }),
     ]
 }

@@ -22,6 +22,7 @@ h2,
 h3,
 input[type=button],
 input[type=submit],
+label,
 ol,
 p,
 ul {
@@ -42,7 +43,8 @@ strong {
 a,
 button,
 input[type=button],
-input[type=submit] {
+input[type=submit],
+label {
     color: inherit;
     transition: 0.3s;
 }
@@ -53,7 +55,8 @@ a {
 
 button,
 input[type=button],
-input[type=submit] {
+input[type=submit],
+label {
     -webkit-font-smoothing: inherit;
     background: none;
     border: 1px solid;
@@ -67,6 +70,7 @@ input[type=submit] {
 
 button:focus,
 input[type=button]:focus,
-input[type=submit]:focus {
+input[type=submit]:focus,
+label {
     outline: none;
 }

@@ -16,7 +16,8 @@ input:disabled:focus {
 
 button.big-btn,
 input[type=button].big-btn,
-input[type=submit].big-btn {
+input[type=submit].big-btn,
+label.big-btn {
     font-size: 1.4em;
     padding: 7px 20px;
     width: 120px;

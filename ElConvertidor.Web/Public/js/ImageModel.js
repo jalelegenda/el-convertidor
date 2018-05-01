@@ -1,6 +1,9 @@
 ﻿const ko = require('knockout');
 
 module.exports =
-    function ImageModel(name) {
-        this.name = ko.observable(name);
+    function ImageModel(file) {
+        const self = this;
+
+        self.file = file;
+        self.name = ko.observable(file.name);
     }
