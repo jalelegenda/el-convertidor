@@ -29,12 +29,10 @@ function ImageFormViewModel() {
                 tempImages.push(new ImageModel(files[i]));
             }
         }
-        console.log(tempImages);
-        console.log(self.images)
         fetch('/Home/AddImagesToSession', {
-            body: formData, 
-            method: 'POST',
-            cache: 'no-cache'
+            body: formData,
+            credentials: 'include',
+            method: 'POST'
         })
         .then(
             (res) => { self.images(self.images().concat(tempImages)); },
