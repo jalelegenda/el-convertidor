@@ -4,7 +4,10 @@ const MiniCssPlugin = require('mini-css-extract-plugin');
 const OptimizeCSS = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-    entry: ['./js/ImageFormViewModel.js', './css/main.css'],
+    entry: {
+        ImageForm: './js/ImageFormViewModel.js',
+        style: './css/main.css'
+    },
     output: {   
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js'
