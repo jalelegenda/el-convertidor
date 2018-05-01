@@ -14,19 +14,32 @@ function ImageFormViewModel() {
 
 
     self.addImages = function (element) {
-        let files = element.files;
-        let formData = new FormData();
+        let files = element.files,
+            formData = new FormData(),
+            tempImages = [];
+
+        // prevent request when page is loaded
+        if(files.length < 1) {
+            return;
+        }
 
         for(let i = 0; i < files.length; i++) {
             if(mimeTypes.indexOf(files[i].type) > -1) {
-                formData.append('image', files[i]);
-                fetch('/Home/AddImageToSession', {
-                    body: formData, 
-                    method: 'POST'
-                });
-                self.images.push(new ImageModel(files[i]));
+                formData.append(`images[${i}].file`, files[i]);
+                tempImages.push(new ImageModel(files[i]));
             }
         }
+        console.log(tempImages);
+        console.log(self.images)
+        fetch('/Home/AddImagesToSession', {
+            body: formData, 
+            method: 'POST',
+            cache: 'no-cache'
+        })
+        .then(
+            (res) => { self.images(self.images().concat(tempImages)); },
+            (err) => { alert(err); }
+        );
     }
 
     self.removeImage = function (image) {
