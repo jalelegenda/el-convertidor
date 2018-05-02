@@ -6,6 +6,7 @@ namespace ElConvertidor.Core.Client
     {
         T Get();
         bool Store(T model, bool? overwrite = true);
+        bool Remove(T model);
         void Clear();
 
         IEnumerable<T> GetCollection();

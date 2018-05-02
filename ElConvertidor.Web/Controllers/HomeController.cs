@@ -50,5 +50,17 @@ namespace ElConvertidor.Web.Controllers
             _imagesSessionService.AddCollection(images);
             return true;
         }
+
+        [HttpPost]
+        public bool RemoveImage(ImagesViewModel image)
+        {
+            if (!ModelState.IsValid)
+            {
+                return false;
+            }
+
+            var isSuccess = _imagesSessionService.Remove(image);
+            return isSuccess;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿import ko from 'knockout';
+import ajax from './Ajax';
 import ImageModel from './ImageModel';
 
 export default function ImageFormViewModel() {
@@ -29,29 +30,26 @@ export default function ImageFormViewModel() {
             }
         }
 
-        fetch('/Home/AddImages', {
-            body: formData,
-            credentials: 'include',
-            method: 'POST'
-        })
-        .then(
-            (res) => { self.images(self.images().concat(tempImages)); },
-            (err) => { alert(err); }
-        );
+        ajax('/Home/AddImages', formData,
+            res => { self.images(self.images().concat(tempImages)); },
+            err => { aler(err); });
     }
 
     self.removeImage = function (image) {
-        self.images.remove(image);
+        let formData = new FormData();
+        formData.append('image.File', image.file)
+        ajax('/Home/RemoveImage', formData,
+            res => { self.images.remove(image); },
+            err => { aler(err); });
     }
 
     self.uploadImages = function() {
         if(self.images().length < 1){
             return;
         }
-        fetch('/Home/UploadImages', {
-            credentials: 'include',
-            method: 'POST'
-        })
+        ajax('/Home/UploadImages', null,
+            res => { self.images.remove(image); },
+            err => { aler(err); });
     }
 
     self.hasImages = ko.computed(() => {

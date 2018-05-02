@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Collections.Generic;
 using ElConvertidor.Core.Client;
+using System.Linq;
 
 namespace ElConvertidor.Web.Services
 {
@@ -46,6 +47,16 @@ namespace ElConvertidor.Web.Services
         public IEnumerable<T> GetCollection()
         {
             return HttpContext.Current.Session[_key] as IEnumerable<T>;
+        }
+
+        public bool Remove(T model)
+        {
+            var session = GetCollection() as List<T>;
+            if(session == null)
+            {
+                return false;
+            }
+            return session.Remove(model);
         }
 
         public bool Store(T model, bool? overwrite = true)
