@@ -1,12 +1,11 @@
 ﻿using ElConvertidor.Core;
 using System.Web;
 using System.Collections.Generic;
-using System;
+
 
 namespace ElConvertidor.Web
 {
-    public class SessionService<T> : ISessionService<T>
-        where T : class
+    public class SessionService<T> : ISessionService<T> where T : class
     {
         private readonly string _key;
 

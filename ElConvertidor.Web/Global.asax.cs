@@ -10,6 +10,7 @@ using Autofac.Integration.Mvc;
 using ElConvertidor.Web.Controllers;
 using ElConvertidor.Infrastructure;
 using ElConvertidor.Core.Infrastructure;
+using ElConvertidor.Core;
 
 namespace ElConvertidor
 {
@@ -21,7 +22,12 @@ namespace ElConvertidor
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-            builder.RegisterType<TiffService>().As<ITiffService>();
+            builder.RegisterType<TiffService>()
+                .As<ITiffService>()
+                .InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(SessionService<>))
+                .As(typeof(ISessionService<>))
+                .InstancePerLifetimeScope();
 
             var container = builder.Build();
 

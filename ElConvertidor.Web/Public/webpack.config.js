@@ -40,9 +40,10 @@ module.exports = {
             }
         ]
     },
+    devtool: 'source-map',
     plugins: [
         new MiniCssPlugin({
             filename: '[name].css'
-        }),
+        })
     ]
 }

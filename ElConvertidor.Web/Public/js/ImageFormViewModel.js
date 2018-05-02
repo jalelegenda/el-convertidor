@@ -1,8 +1,7 @@
-﻿//const ko = require('knockout');
-import ko from 'knockout';
-const ImageModel = require('./ImageModel');
+﻿import ko from 'knockout';
+import ImageModel from './ImageModel';
 
-function ImageFormViewModel() {
+export default function ImageFormViewModel() {
     const self = this;
     const mimeTypes = [
         'image/jpeg',
@@ -25,11 +24,12 @@ function ImageFormViewModel() {
 
         for(let i = 0; i < files.length; i++) {
             if(mimeTypes.indexOf(files[i].type) > -1) {
-                formData.append(`images[${i}].file`, files[i]);
+                formData.append(`images[${i}].File`, files[i]);
                 tempImages.push(new ImageModel(files[i]));
             }
         }
-        fetch('/Home/AddImagesToSession', {
+
+        fetch('/Home/AddImages', {
             body: formData,
             credentials: 'include',
             method: 'POST'
