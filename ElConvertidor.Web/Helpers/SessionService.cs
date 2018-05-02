@@ -1,9 +1,8 @@
-﻿using ElConvertidor.Core;
-using System.Web;
+﻿using System.Web;
 using System.Collections.Generic;
+using ElConvertidor.Core.Client;
 
-
-namespace ElConvertidor.Web
+namespace ElConvertidor.Web.Services
 {
     public class SessionService<T> : ISessionService<T> where T : class
     {

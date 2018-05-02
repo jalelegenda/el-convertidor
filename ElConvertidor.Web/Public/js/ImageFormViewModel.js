@@ -45,7 +45,13 @@ export default function ImageFormViewModel() {
     }
 
     self.uploadImages = function() {
-
+        if(self.images().length < 1){
+            return;
+        }
+        fetch('/Home/UploadImages', {
+            credentials: 'include',
+            method: 'POST'
+        })
     }
 
     self.hasImages = ko.computed(() => {

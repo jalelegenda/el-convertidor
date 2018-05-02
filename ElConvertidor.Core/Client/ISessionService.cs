@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ElConvertidor.Core
+namespace ElConvertidor.Core.Client
 {
     public interface ISessionService<T>
     {

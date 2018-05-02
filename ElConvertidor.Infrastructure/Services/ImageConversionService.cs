@@ -1,18 +1,17 @@
 ﻿using ElConvertidor.Core.Infrastructure;
+using ElConvertidor.Core.Models;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Web;
 
 namespace ElConvertidor.Infrastructure
 {
-    public class TiffService : ITiffService
+    public class ImageProcessingService : IImageProcessingService
     {
-        public bool ConvertImagesToMultipageTiff(IEnumerable<HttpPostedFileBase> images)
+        public bool ConvertImagesToMultipageTiff(IEnumerable<IImage> images)
         {
-
             Stream imageStream = new MemoryStream();
 
             using (EncoderParameters encParams = new EncoderParameters(1))
@@ -23,12 +22,12 @@ namespace ElConvertidor.Infrastructure
                 var tiffEncoder = ImageCodecInfo.GetImageEncoders()
                     .FirstOrDefault(dec => dec.FormatID == ImageFormat.Tiff.Guid);
 
-                Queue<HttpPostedFileBase> fileQueue = new Queue<HttpPostedFileBase>(images);
+                Queue<IImage> fileQueue = new Queue<IImage>(images);
                 encParams.Param[0] = multiParam;
 
                 var file = fileQueue.Dequeue();
 
-                Image mainTiff = Image.FromStream(file.InputStream, true, true);
+                Image mainTiff = Image.FromStream(file.Content, true, true);
                 mainTiff.Save(imageStream, tiffEncoder, encParams);
 
                 while (fileQueue.Count > 0)
@@ -36,7 +35,7 @@ namespace ElConvertidor.Infrastructure
                     encParams.Param[0] = pageParam;
 
                     file = fileQueue.Dequeue();
-                    Image page = Image.FromStream(file.InputStream, true, true);
+                    Image page = Image.FromStream(file.Content, true, true);
                     mainTiff.SaveAdd(page, encParams);
                 }
                 encParams.Param[0] = flushParam;

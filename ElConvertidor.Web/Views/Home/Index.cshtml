@@ -17,7 +17,7 @@
         </section>
         <input accept=".bmp, .gif, .jpg, .jpeg" data-bind="event: { change: addImages($element) }" id="files" type="file" multiple/>
         <label class="big-btn" for="files">Add</label>
-        <input class="big-btn" type="submit" value="Archive" disabled/>
+        <input class="big-btn" data-bind="event: { click: uploadImages }, disable: images().length < 1" type="submit" value="Archive"/>
     }
 </section>
 

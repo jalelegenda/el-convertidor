@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using ElConvertidor.Web;
 using Autofac;
 using Autofac.Integration.Mvc;
-using ElConvertidor.Web.Controllers;
 using ElConvertidor.Infrastructure;
 using ElConvertidor.Core.Infrastructure;
-using ElConvertidor.Core;
+using ElConvertidor.Web.Services;
+using ElConvertidor.Core.Client;
 
 namespace ElConvertidor
 {
@@ -22,8 +18,8 @@ namespace ElConvertidor
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-            builder.RegisterType<TiffService>()
-                .As<ITiffService>()
+            builder.RegisterType<ImageProcessingService>()
+                .As<IImageProcessingService>()
                 .InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(SessionService<>))
                 .As(typeof(ISessionService<>))

@@ -5,4 +5,4 @@ export default function ImageModel(file) {
 
     self.file = file;
     self.name = ko.observable(file.name);
-};
+}
