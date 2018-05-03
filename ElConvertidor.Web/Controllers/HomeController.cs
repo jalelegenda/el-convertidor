@@ -36,6 +36,11 @@ namespace ElConvertidor.Web.Controllers
         public bool UploadImages()
         {
             var images = _imagesSessionService.GetCollection();
+            if(images == null)
+            {
+                return false;
+            }
+
             return _tiffService.ConvertImagesToMultipageTiff(images);
         }
 
@@ -58,9 +63,7 @@ namespace ElConvertidor.Web.Controllers
             {
                 return false;
             }
-
-            var isSuccess = _imagesSessionService.Remove(image);
-            return isSuccess;
+            return _imagesSessionService.Remove(image);
         }
     }
 }

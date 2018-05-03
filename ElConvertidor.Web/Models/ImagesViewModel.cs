@@ -2,10 +2,11 @@
 using System;
 using System.IO;
 using System.Web;
+using System.Collections.Generic;
 
 namespace ElConvertidor.Web.Models
 {
-    public class ImagesViewModel : IImage
+    public class ImagesViewModel : BaseCollectibleViewModel, IImage
     {
         public string Name { get; private set; }
         public string Type { get; private set; }
@@ -27,44 +28,23 @@ namespace ElConvertidor.Web.Models
             }
         }
 
-        public override bool Equals(object obj)
+        protected override bool CompareParameters(object obj)
         {
-            var toCompare = obj as ImagesViewModel;
-            if (string.Equals(Name, toCompare.Name, StringComparison.Ordinal) &&
-                string.Equals(Type, toCompare.Type, StringComparison.Ordinal) &&
-                Content.Length == toCompare.Content.Length)
-            {
-                return true;
-            }
-            return false;
+            var temp = obj as ImagesViewModel;
+            return
+                (Name == temp.Name &&
+                Type == temp.Type &&
+                Content.Length == temp.Content.Length);
         }
 
-        public override int GetHashCode()
+        protected override List<int> GetParameters()
         {
-            int hash = 13;
-            hash = (hash * 7) + Name.GetHashCode();
-            hash = (hash * 7) + Type.GetHashCode();
-            hash = (hash * 7) + Content.Length.GetHashCode();
-
-            return hash;
-        }
-
-        public static bool operator ==(ImagesViewModel a, ImagesViewModel b)
-        {
-            if (a.Equals(b))
+            return new List<int>()
             {
-                return true;
-            }
-            return false;
-        }
-
-        public static bool operator !=(ImagesViewModel a, ImagesViewModel b)
-        {
-            if (a.Equals(b))
-            {
-                return false;
-            }
-            return true;
+                Name.GetHashCode(),
+                Type.GetHashCode(),
+                Content.Length.GetHashCode()
+            };
         }
     }
 }
