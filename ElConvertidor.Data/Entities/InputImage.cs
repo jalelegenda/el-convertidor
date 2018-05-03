@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ElConvertidor.Core.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace ElConvertidor.Data.Entities
 {

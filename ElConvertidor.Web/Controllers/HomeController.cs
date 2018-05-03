@@ -1,14 +1,9 @@
 ﻿using ElConvertidor.Core.Client;
 using ElConvertidor.Core.Infrastructure;
-using ElConvertidor.Core.Models;
 using ElConvertidor.Web.Models;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System;
 
 namespace ElConvertidor.Web.Controllers
 {
@@ -33,15 +28,17 @@ namespace ElConvertidor.Web.Controllers
         }
 
         [HttpPost]
-        public bool UploadImages()
+        public void UploadImages()
         {
             var images = _imagesSessionService.GetCollection();
             if(images == null)
             {
-                return false;
+                throw new Exception("Nothing to upload");
             }
 
-            return _tiffService.ConvertImagesToMultipageTiff(images);
+            var imageStream = _tiffService.ConvertImagesToMultipageTiff(images);
+            _imagesSessionService.Clear();
+            //return File(imageStream, "image/tiff", "CompoundImage.tiff");
         }
 
         [HttpPost]

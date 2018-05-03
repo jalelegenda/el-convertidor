@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ElConvertidor.Web.Models
 {
-    public class ImagesViewModel : BaseCollectibleViewModel, IImage
+    public class ImagesViewModel : BaseCollectibleViewModel, ISourceImage
     {
         public string Name { get; private set; }
         public string Type { get; private set; }

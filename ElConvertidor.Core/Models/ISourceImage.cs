@@ -2,7 +2,7 @@
 
 namespace ElConvertidor.Core.Models
 {
-    public interface IImage
+    public interface ISourceImage
     {
         string Name { get; }
         string Type { get; }

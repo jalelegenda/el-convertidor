@@ -10,8 +10,9 @@ namespace ElConvertidor.Data.Contexts
         public DbSet<InputImage> InputImage { get; set; }
         public DbSet<Conversion> Conversion { get; set; }
 
-        public ConversionsContext() : base("Conversions")
+        public ConversionsContext() : base(ConfigurationManager.ConnectionStrings["Conversions"].ConnectionString)
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ConversionsContext>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

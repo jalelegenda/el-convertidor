@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using ElConvertidor.Core.Models;
+using System.IO;
 
 namespace ElConvertidor.Core.Infrastructure
 {
     public interface IImageProcessingService
     {
-        bool ConvertImagesToMultipageTiff(IEnumerable<IImage> images);
+        Stream ConvertImagesToMultipageTiff(IEnumerable<ISourceImage> images);
     }
 }

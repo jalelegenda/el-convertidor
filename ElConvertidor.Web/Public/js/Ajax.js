@@ -1,9 +1,10 @@
-﻿export default function ajax(url, data, onSuccess, onError) {
+﻿export default function ajax(url, data, method, onSuccess, onError) {
     if(data === null){
         fetch(url, {
             credentials: 'include',
-            method: 'GET'
+            method: method === null ? 'GET' : method
         })
+        .then(onSuccess, onError);
     } else {
         fetch(url, {
             body: data,

@@ -7,6 +7,8 @@ using ElConvertidor.Infrastructure;
 using ElConvertidor.Core.Infrastructure;
 using ElConvertidor.Web.Services;
 using ElConvertidor.Core.Client;
+using ElConvertidor.Data.Services;
+using ElConvertidor.Core.Data;
 
 namespace ElConvertidor
 {
@@ -21,6 +23,9 @@ namespace ElConvertidor
             builder.RegisterType<ImageProcessingService>()
                 .As<IImageProcessingService>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<ConversionsStore>()
+                .As<IConversionsStore>()
+                .InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(SessionService<>))
                 .As(typeof(ISessionService<>))
                 .InstancePerLifetimeScope();
@@ -32,5 +37,7 @@ namespace ElConvertidor
             //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+
     }
 }

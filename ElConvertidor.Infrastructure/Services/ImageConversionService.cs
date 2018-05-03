@@ -1,4 +1,5 @@
-﻿using ElConvertidor.Core.Infrastructure;
+﻿using ElConvertidor.Core.Data;
+using ElConvertidor.Core.Infrastructure;
 using ElConvertidor.Core.Models;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,9 +9,16 @@ using System.Linq;
 
 namespace ElConvertidor.Infrastructure
 {
-    public class ImageProcessingService : IImageProcessingService
+    public sealed class ImageProcessingService : IImageProcessingService
     {
-        public bool ConvertImagesToMultipageTiff(IEnumerable<IImage> images)
+        private IConversionsStore _conversionsStore;
+
+        public ImageProcessingService(IConversionsStore conversionsStore)
+        {
+            _conversionsStore = conversionsStore;
+        }
+
+        public Stream ConvertImagesToMultipageTiff(IEnumerable<ISourceImage> images)
         {
             Stream imageStream = new MemoryStream();
 
@@ -22,7 +30,7 @@ namespace ElConvertidor.Infrastructure
                 var tiffEncoder = ImageCodecInfo.GetImageEncoders()
                     .FirstOrDefault(dec => dec.FormatID == ImageFormat.Tiff.Guid);
 
-                Queue<IImage> fileQueue = new Queue<IImage>(images);
+                Queue<ISourceImage> fileQueue = new Queue<ISourceImage>(images);
                 encParams.Param[0] = multiParam;
 
                 var file = fileQueue.Dequeue();
@@ -41,8 +49,8 @@ namespace ElConvertidor.Infrastructure
                 encParams.Param[0] = flushParam;
                 imageStream.Position = 0;
             }
-
-            return true;
+            _conversionsStore.StoreConversion(images);
+            return imageStream;
         }
     }
 }

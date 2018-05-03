@@ -30,27 +30,31 @@ export default function ImageFormViewModel() {
             }
         }
 
-        ajax('/Home/AddImages', formData,
+        ajax('/Home/AddImages', formData, null,
             res => { self.images(self.images().concat(tempImages)); },
             err => { aler(err); });
-    }
+    };
 
     self.removeImage = function (image) {
         let formData = new FormData();
-        formData.append('image.File', image.file)
-        ajax('/Home/RemoveImage', formData,
+        formData.append('image.File', image.file);
+        ajax('/Home/RemoveImage', formData, null,
             res => { self.images.remove(image); },
             err => { aler(err); });
-    }
+    };
 
     self.uploadImages = function() {
         if(self.images().length < 1){
             return;
         }
-        ajax('/Home/UploadImages', null,
-            res => { self.images.remove(image); },
-            err => { aler(err); });
-    }
+        ajax('/Home/UploadImages', null, 'POST',
+            res => { 
+                console.log("enter");
+                self.images([]);
+                return res.blob();
+            },
+            err => { alert(err); });
+    };
 
     self.hasImages = ko.computed(() => {
         return self.images().length < 1 ? true : false;
