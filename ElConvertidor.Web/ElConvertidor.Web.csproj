@@ -137,7 +137,6 @@
     <Content Include="Public\css\main.css" />
     <Content Include="Public\dist\ImageForm.js" />
     <Content Include="Public\dist\style.css" />
-    <Content Include="Public\js\Ajax.js" />
     <Content Include="Public\js\ImageFormViewModel.js" />
     <Content Include="Public\js\ImageModel.js" />
     <Content Include="Public\webpack.config.js" />

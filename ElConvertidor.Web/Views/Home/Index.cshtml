@@ -1,4 +1,8 @@
-﻿@{
+﻿@using ElConvertidor.Web.Models
+
+@model List<ImagesViewModel>
+
+@{
     ViewBag.Title = "Multipage image generator";
 }
 
@@ -6,18 +10,21 @@
     @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "image-upload", enctype = "multipart/form-data" }))
     {
         <section class="panel">
-            <h1>Image archiver</h1>
-            <h3 data-bind="visible: hasImages()">No images added yet...</h3>
+            <h1>Image converter</h1>
+            <h3 data-bind="visible: hasNoImages()">No images added yet...</h3>
             <table data-bind="foreach: images">
                 <tr>
                     <td class="file-name" data-bind="text: name"></td>
                     <td class="control"><button data-bind="click: $root.removeImage">Remove</button></td>
                 </tr>
             </table>
+            <div>
+                <button data-bind="visible: !hasNoImages(), click: clearImages">Clear</button>
+            </div>
         </section>
         <input accept=".bmp, .gif, .jpg, .jpeg" data-bind="event: { change: addImages($element) }" id="files" type="file" multiple/>
         <label class="big-btn" for="files">Add</label>
-        <input class="big-btn" data-bind="event: { click: uploadImages }, disable: images().length < 1" type="submit" value="Archive"/>
+        <input class="big-btn" data-bind="event: { click: convertImages }, disable: hasNoImages()" type="submit" value="Convert"/>
     }
 </section>
 

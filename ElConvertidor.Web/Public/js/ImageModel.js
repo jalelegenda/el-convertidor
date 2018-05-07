@@ -1,8 +1,8 @@
 ﻿import ko from 'knockout';
 
-export default function ImageModel(file) {
+export default function ImageModel(name, type) {
     const self = this;
 
-    self.file = file;
-    self.name = ko.observable(file.name);
+    self.name = ko.observable(name);
+    self.type = ko.observable(type);
 }

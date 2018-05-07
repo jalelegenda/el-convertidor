@@ -11,6 +11,10 @@ section {
     text-align: center;
 }
 
+div {
+    margin-top: 25px;
+}
+
 main {
     margin-top: 80px;
 }

@@ -13,7 +13,6 @@ namespace ElConvertidor.Web.Models
 
         public override bool Equals(object obj)
         {
-            var toCompare = obj as ImagesViewModel;
             if (CompareParameters(obj))
             {
                 return true;
@@ -32,22 +31,23 @@ namespace ElConvertidor.Web.Models
             return hash;
         }
 
-        public static bool operator ==(BaseCollectibleViewModel a, BaseCollectibleViewModel b)
-        {
-            if (a.Equals(b))
-            {
-                return true;
-            }
-            return false;
-        }
+        // left as reminder: this will fail on calling Remove
+        //public static bool operator ==(BaseCollectibleViewModel a, object b)
+        //{
+        //    if (a.Equals(b))
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
-        public static bool operator !=(BaseCollectibleViewModel a, BaseCollectibleViewModel b)
-        {
-            if (a.Equals(b))
-            {
-                return false;
-            }
-            return true;
-        }
+        //public static bool operator !=(BaseCollectibleViewModel a, object b)
+        //{
+        //    if (a.Equals(b))
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
     }
 }

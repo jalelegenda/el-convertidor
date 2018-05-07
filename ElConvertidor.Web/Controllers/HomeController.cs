@@ -4,6 +4,8 @@ using ElConvertidor.Web.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace ElConvertidor.Web.Controllers
 {
@@ -28,7 +30,14 @@ namespace ElConvertidor.Web.Controllers
         }
 
         [HttpPost]
-        public void UploadImages()
+        public string GetSessionImages()
+        {
+            var images = _imagesSessionService.GetCollection();
+            return JsonConvert.SerializeObject(images, Formatting.Indented);
+        }
+
+        [HttpPost]
+        public ActionResult ConvertImages()
         {
             var images = _imagesSessionService.GetCollection();
             if(images == null)
@@ -38,7 +47,7 @@ namespace ElConvertidor.Web.Controllers
 
             var imageStream = _tiffService.ConvertImagesToMultipageTiff(images);
             _imagesSessionService.Clear();
-            //return File(imageStream, "image/tiff", "CompoundImage.tiff");
+            return File(imageStream, "image/tiff", "CompoundImage.tiff");
         }
 
         [HttpPost]
@@ -61,6 +70,12 @@ namespace ElConvertidor.Web.Controllers
                 return false;
             }
             return _imagesSessionService.Remove(image);
+        }
+
+        [HttpPost]
+        public void ClearImages()
+        {
+            _imagesSessionService.Clear();
         }
     }
 }

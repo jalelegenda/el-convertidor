@@ -3,15 +3,21 @@ using System;
 using System.IO;
 using System.Web;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace ElConvertidor.Web.Models
 {
     public class ImagesViewModel : BaseCollectibleViewModel, ISourceImage
     {
-        public string Name { get; private set; }
-        public string Type { get; private set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        [ScriptIgnore]
+        [JsonIgnore]
         public Stream Content { get; private set; }
         private HttpPostedFileBase _file;
+        [ScriptIgnore]
+        [JsonIgnore]
         public HttpPostedFileBase File
         {
             get
@@ -31,10 +37,13 @@ namespace ElConvertidor.Web.Models
         protected override bool CompareParameters(object obj)
         {
             var temp = obj as ImagesViewModel;
+            if (temp == null)
+            {
+                return false;
+            }
             return
                 (Name == temp.Name &&
-                Type == temp.Type &&
-                Content.Length == temp.Content.Length);
+                Type == temp.Type);
         }
 
         protected override List<int> GetParameters()
@@ -42,8 +51,7 @@ namespace ElConvertidor.Web.Models
             return new List<int>()
             {
                 Name.GetHashCode(),
-                Type.GetHashCode(),
-                Content.Length.GetHashCode()
+                Type.GetHashCode()
             };
         }
     }

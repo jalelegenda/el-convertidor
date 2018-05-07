@@ -1,6 +1,6 @@
 ﻿import ko from 'knockout';
-import ajax from './Ajax';
 import ImageModel from './ImageModel';
+
 
 export default function ImageFormViewModel() {
     const self = this;
@@ -12,9 +12,30 @@ export default function ImageFormViewModel() {
 
     self.images = ko.observableArray([]);
 
+    /* session checker */
 
-    self.addImages = function (element) {
-        let files = element.files,
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('/Home/GetSessionImages', {
+            Accept: 'application/json',
+            method: 'POST',
+            credentials: 'include'
+        }).then(
+            res => {
+                return res.json();
+        }).then(
+        data => {
+            if(data !== null){
+                var arr = data.map(i => new ImageModel(i.Name, i.Type));
+                self.images(arr);
+            }
+        });
+    });
+
+
+    /* handlers */
+
+    self.addImages =  (element) => {
+        let files = Array.from(element.files),
             formData = new FormData(),
             tempImages = [];
 
@@ -23,42 +44,83 @@ export default function ImageFormViewModel() {
             return;
         }
 
+        if(files.some(i => self.images().indexOf(i.Name) > -1)) {
+            return;
+        }
+
         for(let i = 0; i < files.length; i++) {
             if(mimeTypes.indexOf(files[i].type) > -1) {
                 formData.append(`images[${i}].File`, files[i]);
-                tempImages.push(new ImageModel(files[i]));
+                tempImages.push(new ImageModel(files[i].name, files[i].type));
             }
         }
 
-        ajax('/Home/AddImages', formData, null,
-            res => { self.images(self.images().concat(tempImages)); },
-            err => { aler(err); });
+        fetch('/Home/AddImages', {
+            body: formData,
+            method: 'POST',
+            credentials: 'include'
+        }).then(res => {
+            self.images(self.images().concat(tempImages));
+        }, err => {
+            alert(err);
+        });
+
+        element.value = "";
     };
 
-    self.removeImage = function (image) {
+
+    self.removeImage = (image) => {
         let formData = new FormData();
-        formData.append('image.File', image.file);
-        ajax('/Home/RemoveImage', formData, null,
-            res => { self.images.remove(image); },
-            err => { aler(err); });
+        formData.append('image.name', image.name());
+        formData.append('image.type', image.type());
+        fetch('/Home/RemoveImage', {
+            body: formData,
+            method: 'POST',
+            credentials: 'include'
+        }).then(res => {
+            self.images.remove(image);
+        }, err => { 
+            alert(err);
+        });
     };
 
-    self.uploadImages = function() {
-        if(self.images().length < 1){
+
+    self.convertImages = () => {
+        if(self.hasNoImages()){
             return;
         }
-        ajax('/Home/UploadImages', null, 'POST',
-            res => { 
-                console.log("enter");
-                self.images([]);
-                return res.blob();
-            },
-            err => { alert(err); });
+        fetch('Home/ConvertImages', {
+            method: 'POST',
+            credentials: 'include'
+        }).then(res => {
+            self.images([]);
+            return res.blob();
+        }).then(blob => {
+            return URL.createObjectURL(blob)
+        }).then(url => {
+            window.open(url, "_blank");
+            URL.revokeObjectURL(url);
+        }).catch(err => {
+            alert(err);
+        });
     };
 
-    self.hasImages = ko.computed(() => {
-        return self.images().length < 1 ? true : false;
-    });
+
+    self.clearImages = () => {
+        fetch('Home/ClearImages', {
+            method: 'POST',
+            credentials: 'include'
+        }).then(res => {
+            self.images([]);
+        }, err => {
+            alert(err);
+        });
+    }
+
+
+    self.hasNoImages = () => {
+        return self.images().length < 1;
+    }
 }
 
 ko.applyBindings(new ImageFormViewModel);
