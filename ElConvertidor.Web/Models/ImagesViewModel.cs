@@ -1,10 +1,7 @@
 ﻿using ElConvertidor.Core.Models;
-using System;
 using System.IO;
 using System.Web;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Web.Script.Serialization;
 
 namespace ElConvertidor.Web.Models
 {
@@ -12,12 +9,14 @@ namespace ElConvertidor.Web.Models
     {
         public string Name { get; set; }
         public string Type { get; set; }
-        [ScriptIgnore]
-        [JsonIgnore]
+
+        public bool ShouldSerializeContent() { return false; }
         public Stream Content { get; private set; }
+
+
         private HttpPostedFileBase _file;
-        [ScriptIgnore]
-        [JsonIgnore]
+
+        public bool ShouldSerializeFile() { return false; }
         public HttpPostedFileBase File
         {
             get
