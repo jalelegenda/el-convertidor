@@ -20,15 +20,15 @@ export default function ImageFormViewModel() {
             method: 'POST',
             credentials: 'include'
         }).then(
-            res => {
-                return res.json();
+        res => {
+            return res.json();
         }).then(
         data => {
-            if(data !== null){
-                var arr = data.map(i => new ImageModel(i.Name, i.Type));
+            if(data !== null) {
+                var arr = data.map(i => new ImageModel(i.Id, i.Name, i.Type));
                 self.images(arr);
             }
-        });
+        }).catch(err => { });
     });
 
 
@@ -44,14 +44,10 @@ export default function ImageFormViewModel() {
             return;
         }
 
-        if(files.some(i => self.images().indexOf(i.Name) > -1)) {
-            return;
-        }
-
         for(let i = 0; i < files.length; i++) {
             if(mimeTypes.indexOf(files[i].type) > -1) {
                 formData.append(`images[${i}].File`, files[i]);
-                tempImages.push(new ImageModel(files[i].name, files[i].type));
+                tempImages.push(new ImageModel(self.images().length, files[i].name, files[i].type));
             }
         }
 
@@ -71,8 +67,9 @@ export default function ImageFormViewModel() {
 
     self.removeImage = (image) => {
         let formData = new FormData();
-        formData.append('image.name', image.name());
-        formData.append('image.type', image.type());
+        formData.append('image.id', image.id);
+        formData.append('image.name', image.name);
+        formData.append('image.type', image.type);
         fetch('/Home/RemoveImage', {
             body: formData,
             method: 'POST',

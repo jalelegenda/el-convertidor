@@ -7,6 +7,7 @@ namespace ElConvertidor.Web.Models
 {
     public class ImagesViewModel : BaseCollectibleViewModel, ISourceImage
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
 
@@ -41,7 +42,8 @@ namespace ElConvertidor.Web.Models
                 return false;
             }
             return
-                (Name == temp.Name &&
+                (Id == temp.Id && 
+                Name == temp.Name &&
                 Type == temp.Type);
         }
 

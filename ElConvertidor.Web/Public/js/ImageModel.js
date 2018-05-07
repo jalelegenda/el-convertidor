@@ -1,8 +1,9 @@
 ﻿import ko from 'knockout';
 
-export default function ImageModel(name, type) {
+export default function ImageModel(id, name, type) {
     const self = this;
 
-    self.name = ko.observable(name);
-    self.type = ko.observable(type);
+    self.id = id;
+    self.name = name;
+    self.type = type;
 }
