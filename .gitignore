@@ -1,5 +1,5 @@
 packages 
 .vs
-*/obj
-*/bin
+obj
+bin
 node_modules
