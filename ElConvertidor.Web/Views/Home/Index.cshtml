@@ -12,11 +12,13 @@
         <section class="panel">
             <h1>Image converter</h1>
             <h3 data-bind="visible: hasNoImages()">No images added yet...</h3>
-            <table data-bind="foreach: images">
-                <tr>
-                    <td class="file-name" data-bind="text: name"></td>
-                    <td class="control"><button data-bind="click: $root.removeImage">Remove</button></td>
-                </tr>
+            <table>
+                <tbody data-bind="foreach: images">
+                    <tr>
+                        <td class="file-name" data-bind="text: name"></td>
+                        <td class="control"><button data-bind="click: $root.removeImage">Remove</button></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="control-panel">
                 <button data-bind="visible: !hasNoImages(), click: clearImages">Clear</button>
@@ -28,8 +30,8 @@
     }
 </section>
 <section class="container">
-    <section class="error-panel">
-            <p class="error" data-bind="text: errorInfo">A test error.</p>
+    <section class="error-panel" data-bind="foreach: errors">
+            <p class="error" data-bind="text: error">A test error.</p>
     </section>
 </section>
 

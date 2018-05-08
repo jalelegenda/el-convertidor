@@ -1,5 +1,6 @@
 ﻿import ko from 'knockout';
 import ImageModel from './ImageModel';
+import ErrorModel from './ErrorModel';
 
 
 export default function ImageFormViewModel() {
@@ -10,25 +11,25 @@ export default function ImageFormViewModel() {
         'image/bmp'
     ];
 
-    self.images = ko.observableArray([]);
+    self.images = ko.observableArray();
+    self.errors = ko.observableArray();
 
     /* session checker */
 
     document.addEventListener("DOMContentLoaded", () => {
+        self.errors([]);
+
         fetch('/Home/GetSessionImages', {
-            Accept: 'application/json',
             method: 'POST',
             credentials: 'include'
-        }).then(
-        res => {
-            return res.json();
-        }).then(
-        data => {
-            if(data !== null) {
-                var arr = data.map(i => new ImageModel(i.Id, i.Name, i.Type));
-                self.images(arr);
-            }
-        }).catch(err => { });
+        })
+            .then(handleErrors)
+            .then( res => { return res.json(); })
+            .then( data => { 
+                if(data !== null) {
+                    var arr = data.map(i => new ImageModel(i.Id, i.Name, i.Type));
+                    self.images(arr);
+                }});
     });
 
 
@@ -47,7 +48,8 @@ export default function ImageFormViewModel() {
         for(let i = 0; i < files.length; i++) {
             if(mimeTypes.indexOf(files[i].type) > -1) {
                 formData.append(`images[${i}].File`, files[i]);
-                tempImages.push(new ImageModel(self.images().length, files[i].name, files[i].type));
+                tempImages.push(new ImageModel(self.images().length,
+                    files[i].name, files[i].type));
             }
         }
 
@@ -55,11 +57,10 @@ export default function ImageFormViewModel() {
             body: formData,
             method: 'POST',
             credentials: 'include'
-        }).then(res => {
-            self.images(self.images().concat(tempImages));
-        }, err => {
-            alert(err);
-        });
+        })
+            .then(handleErrors)
+            .then(res => { self.images(self.images().concat(tempImages)); })
+            .catch(addError);
 
         element.value = "";
     };
@@ -74,11 +75,10 @@ export default function ImageFormViewModel() {
             body: formData,
             method: 'POST',
             credentials: 'include'
-        }).then(res => {
-            self.images.remove(image);
-        }, err => { 
-            alert(err);
-        });
+        })
+            .then(handleErrors)
+            .then(res => { self.images.remove(image); })
+            .catch(addError);
     };
 
 
@@ -89,17 +89,15 @@ export default function ImageFormViewModel() {
         fetch('Home/ConvertImages', {
             method: 'POST',
             credentials: 'include'
-        }).then(res => {
-            self.images([]);
-            return res.blob();
-        }).then(blob => {
-            return URL.createObjectURL(blob)
-        }).then(url => {
-            window.open(url, "_blank");
-            URL.revokeObjectURL(url);
-        }).catch(err => {
-            alert(err);
-        });
+        })
+            .then(handleErrors)
+            .then(res => {
+                self.images([]);
+                return res.blob();
+            })
+            .then(blob => { return URL.createObjectURL(blob); })
+            .then(url => { window.open(url, "_blank"); URL.revokeObjectURL(url); })
+            .catch(addErrorAndReset);
     };
 
 
@@ -107,16 +105,38 @@ export default function ImageFormViewModel() {
         fetch('Home/ClearImages', {
             method: 'POST',
             credentials: 'include'
-        }).then(res => {
-            self.images([]);
-        }, err => {
-            alert(err);
-        });
+        })
+            .then(handleErrors)
+            .then(res => { self.images([]); })
+            .catch(addErrorAndReset);
     }
 
 
     self.hasNoImages = () => {
         return self.images().length < 1;
+    }
+
+
+    /* helpers */
+
+    function handleErrors(res) {
+        if(!res.ok){
+            throw new Error(res.statusText);
+        }
+        return res;
+    }
+
+    function addError(err) {
+        let em = new ErrorModel(err);
+        self.errors.push(em);
+        setTimeout(() => {
+            self.errors.remove(em);
+        }, 10000)
+    }
+
+    function addErrorAndReset(err) {
+        addError(err);
+        self.images([]);
     }
 }
 
