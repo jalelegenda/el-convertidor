@@ -18,7 +18,7 @@
                     <td class="control"><button data-bind="click: $root.removeImage">Remove</button></td>
                 </tr>
             </table>
-            <div>
+            <div class="control-panel">
                 <button data-bind="visible: !hasNoImages(), click: clearImages">Clear</button>
             </div>
         </section>
@@ -26,6 +26,11 @@
         <label class="big-btn" for="files">Add</label>
         <input class="big-btn" data-bind="event: { click: convertImages }, disable: hasNoImages()" type="submit" value="Convert"/>
     }
+</section>
+<section class="container">
+    <section class="error-panel">
+            <p class="error" data-bind="text: errorInfo">A test error.</p>
+    </section>
 </section>
 
 <script src="~/Public/dist/ImageForm.js" type="text/javascript"></script>

@@ -11,25 +11,8 @@ section {
     text-align: center;
 }
 
-div {
-    margin-top: 25px;
-}
-
 main {
     margin-top: 80px;
-}
-
-section.container {
-    max-width: 650px;
-    margin-top: 35px;
-}
-
-section.panel {    
-    border: 1px dashed;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    min-height: 300px;
-    padding: 20px;
 }
 
 /*Tables*/
@@ -61,8 +44,25 @@ td.control {
     text-align: right;
 }
 
+/*Containers*/
 
+.container {
+    max-width: 650px;
+    margin-top: 35px;
+}
 
+.control-panel,
+.error-panel {
+    margin-top: 25px;
+}
+
+.panel {    
+    border: 1px dashed;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    min-height: 300px;
+    padding: 20px;
+}
 
 .image-upload {
     max-width: 800px;
@@ -74,6 +74,8 @@ td.control {
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+
+/* Utility */
 
 .clearfix:after {
     content: "";
