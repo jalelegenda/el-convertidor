@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ElConvertidor.Data.Contexts;
 using ElConvertidor.Data.Entities;
 using ElConvertidor.Core.Data;
 using ElConvertidor.Core.Models;
+using System.Data.Entity;
 
 namespace ElConvertidor.Data.Services
 {
     public class ConversionsStore : IConversionsStore
     {
+        private readonly DbContext _context;
+
+        public ConversionsStore(DbContext context)
+        {
+            _context = context;
+        }
+
         public void StoreConversion(IEnumerable<ISourceImage> source)
         {
             List<InputImage> inputImages = new List<InputImage>();
@@ -30,12 +35,9 @@ namespace ElConvertidor.Data.Services
                 InputImages = inputImages
             };
 
-            using(var dbContext = new ConversionsContext())
-            {
-                dbContext.Conversion.Add(conversion);
-                dbContext.InputImage.AddRange(inputImages);
-                dbContext.SaveChanges();
-            }
+            _context.Set<Conversion>().Add(conversion);
+            _context.Set<InputImage>().AddRange(inputImages);
+            _context.SaveChanges();
         }
     }
 }

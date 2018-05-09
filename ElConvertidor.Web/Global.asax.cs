@@ -9,6 +9,8 @@ using ElConvertidor.Web.Services;
 using ElConvertidor.Core.Client;
 using ElConvertidor.Data.Services;
 using ElConvertidor.Core.Data;
+using ElConvertidor.Data.Contexts;
+using System.Data.Entity;
 
 namespace ElConvertidor
 {
@@ -34,6 +36,10 @@ namespace ElConvertidor
 
             builder.RegisterType<ImageValidationService>()
                 .As<IImageValidationService>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ConversionsContext>()
+                .As<DbContext>()
                 .InstancePerLifetimeScope();
 
             var container = builder.Build();
