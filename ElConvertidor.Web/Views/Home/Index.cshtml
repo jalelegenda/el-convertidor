@@ -23,6 +23,7 @@
             <div class="control-panel">
                 <button data-bind="visible: !hasNoImages(), click: clearImages">Clear</button>
             </div>
+            <div class="abs-center loader" data-bind="visible: isLoading"></div>
         </section>
         <input accept=".bmp, .gif, .jpg, .jpeg" data-bind="event: { change: addImages($element) }" id="files" type="file" multiple/>
         <label class="big-btn" for="files">Add</label>

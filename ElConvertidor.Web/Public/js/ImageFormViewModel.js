@@ -1,4 +1,5 @@
 ﻿import ko from 'knockout';
+import _fetch from './MyFetch'
 import ImageModel from './ImageModel';
 import ErrorModel from './ErrorModel';
 
@@ -13,13 +14,14 @@ export default function ImageFormViewModel() {
 
     self.images = ko.observableArray();
     self.errors = ko.observableArray();
+    self.isLoading = ko.observable(false);
 
     /* session checker */
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener('DOMContentLoaded', () => {
         self.errors([]);
 
-        fetch('/Home/GetSessionImages', {
+        _fetch('/Home/GetSessionImages', {
             method: 'POST',
             credentials: 'include'
         })
@@ -30,6 +32,16 @@ export default function ImageFormViewModel() {
                     let arr = data.map(i => new ImageModel(i.Id, i.Name, i.Type));
                     self.images(arr);
                 }});
+    });
+
+    /* spinner events */
+
+    document.addEventListener('fetching', () => {
+        self.isLoading(true);
+    });
+
+    document.addEventListener('fetchend', () => {
+        self.isLoading(false);
     });
 
 
@@ -52,7 +64,7 @@ export default function ImageFormViewModel() {
             newImages.push(new ImageModel(lastId, files[i].name, files[i].type));
         }
 
-        fetch('/Home/AddImages', {
+        _fetch('/Home/AddImages', {
             body: formData,
             method: 'POST',
             credentials: 'include'
@@ -75,7 +87,7 @@ export default function ImageFormViewModel() {
         formData.append('image.id', image.id);
         formData.append('image.name', image.name);
         formData.append('image.type', image.type);
-        fetch('/Home/RemoveImage', {
+        _fetch('/Home/RemoveImage', {
             body: formData,
             method: 'POST',
             credentials: 'include'
@@ -90,7 +102,8 @@ export default function ImageFormViewModel() {
         if(self.hasNoImages()){
             return;
         }
-        fetch('Home/ConvertImages', {
+
+        _fetch('Home/ConvertImages', {
             method: 'POST',
             credentials: 'include'
         })
@@ -108,7 +121,7 @@ export default function ImageFormViewModel() {
 
 
     self.clearImages = () => {
-        fetch('Home/ClearImages', {
+        _fetch('Home/ClearImages', {
             method: 'POST',
             credentials: 'include'
         })

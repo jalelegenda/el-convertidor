@@ -22,3 +22,22 @@ label.big-btn {
     padding: 7px 20px;
     width: 120px;
 }
+
+.loader {
+    animation: spin .7s linear infinite;
+    border: 8px solid #d4d4d4;
+    border-radius: 50%;
+    border-top: 8px solid #8B0000;
+    height: 30px;
+    width: 30px;
+}
+
+    .loader.abs-center {
+        margin-top: -15px;
+        margin-left: -15px;
+    }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

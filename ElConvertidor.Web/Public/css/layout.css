@@ -62,6 +62,7 @@ td.control {
     margin-bottom: 20px;
     min-height: 300px;
     padding: 20px;
+    position: relative;
 }
 
 .image-upload {
@@ -81,4 +82,10 @@ td.control {
     content: "";
     clear: both;
     display: table;
+}
+
+.abs-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
