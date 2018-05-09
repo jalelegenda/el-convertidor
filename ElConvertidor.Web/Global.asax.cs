@@ -46,7 +46,6 @@ namespace ElConvertidor
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 
