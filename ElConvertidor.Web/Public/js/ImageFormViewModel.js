@@ -155,7 +155,7 @@ export default function ImageFormViewModel() {
         });
 
         invalid.forEach(i => {
-            addError(i.name + " is not an image");
+            addError(i.name + " is unsupported");
         });
 
         return valid;
