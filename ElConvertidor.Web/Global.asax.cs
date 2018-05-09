@@ -11,6 +11,7 @@ using ElConvertidor.Data.Services;
 using ElConvertidor.Core.Data;
 using ElConvertidor.Data.Contexts;
 using System.Data.Entity;
+using System;
 
 namespace ElConvertidor
 {
@@ -49,6 +50,13 @@ namespace ElConvertidor
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 
+        //protected void Application_Error(object sender, EventArgs e)
+        //{
+        //    var lastError = Server.GetLastError();
+        //    LogError(lastError);
+
+        //    Determine next steps from user experience.
+        //}
 
     }
 }
