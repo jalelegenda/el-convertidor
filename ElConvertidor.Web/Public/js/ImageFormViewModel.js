@@ -27,7 +27,7 @@ export default function ImageFormViewModel() {
             .then( res => { return res.json(); })
             .then( data => { 
                 if(data !== null) {
-                    var arr = data.map(i => new ImageModel(i.Id, i.Name, i.Type));
+                    let arr = data.map(i => new ImageModel(i.Id, i.Name, i.Type));
                     self.images(arr);
                 }});
     });
@@ -38,7 +38,8 @@ export default function ImageFormViewModel() {
     self.addImages =  (element) => {
         let files = Array.from(element.files),
             formData = new FormData(),
-            tempImages = [];
+            newImages = [],
+            lastId = getLastImageId();
 
         // prevent request when page is loaded
         if(files.length < 1) {
@@ -46,11 +47,9 @@ export default function ImageFormViewModel() {
         }
 
         for(let i = 0; i < files.length; i++) {
-            if(mimeTypes.indexOf(files[i].type) > -1) {
-                formData.append(`images[${i}].File`, files[i]);
-                tempImages.push(new ImageModel(self.images().length,
-                    files[i].name, files[i].type));
-            }
+            formData.append(`images[${i}].Id`, ++lastId)
+            formData.append(`images[${i}].File`, files[i]);
+            newImages.push(new ImageModel(lastId, files[i].name, files[i].type));
         }
 
         fetch('/Home/AddImages', {
@@ -59,7 +58,12 @@ export default function ImageFormViewModel() {
             credentials: 'include'
         })
             .then(handleErrors)
-            .then(res => { self.images(self.images().concat(tempImages)); })
+            .then(res => { return res.json() })
+            .then(data => { if(data === null) { throw new Error ("Invalid formats"); }
+                return data })
+            .then(data => { return data.map(i => new ImageModel(i.Id, i.Name, i.Type)) })
+            .then(handleInvalidFiles.bind(null, newImages))
+            .then(images => self.images(self.images().concat(images)))
             .catch(addError);
 
         element.value = "";
@@ -109,12 +113,12 @@ export default function ImageFormViewModel() {
             .then(handleErrors)
             .then(res => { self.images([]); })
             .catch(addErrorAndReset);
-    }
+    };
 
 
     self.hasNoImages = () => {
         return self.images().length < 1;
-    }
+    };
 
 
     /* helpers */
@@ -131,12 +135,36 @@ export default function ImageFormViewModel() {
         self.errors.push(em);
         setTimeout(() => {
             self.errors.remove(em);
-        }, 10000)
+        }, 10000);
     }
 
     function addErrorAndReset(err) {
         addError(err);
         self.images([]);
+    }
+
+    function handleInvalidFiles(latest, valid) {
+        let invalid = latest.filter(i => {
+            return !valid.some(j => 
+                j.id === i.id &&
+                j.name === i.name &&
+                j.type === i.type
+            )
+        });
+
+        invalid.forEach(i => {
+            addError(i.name + " is not an image");
+        });
+
+        return valid;
+    }
+
+    function getLastImageId() {
+        let lastElement = self.images()[self.images().length - 1];
+        if (lastElement === undefined) {
+            return 0;
+        }
+        return lastElement.id;
     }
 }
 

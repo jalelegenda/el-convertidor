@@ -137,6 +137,7 @@
     <Content Include="Public\css\main.css" />
     <Content Include="Public\dist\ImageForm.js" />
     <Content Include="Public\dist\style.css" />
+    <Content Include="Public\js\ErrorModel.js" />
     <Content Include="Public\js\ImageFormViewModel.js" />
     <Content Include="Public\js\ImageModel.js" />
     <Content Include="Public\webpack.config.js" />
@@ -160,6 +161,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ElConvertidor.Business\ElConvertidor.Business.csproj">
+      <Project>{c1bafcaa-758a-4b31-b34c-ebca200aff53}</Project>
+      <Name>ElConvertidor.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ElConvertidor.Core\ElConvertidor.Core.csproj">
       <Project>{ce770962-40a5-4660-84e4-be693678799d}</Project>
       <Name>ElConvertidor.Core</Name>
@@ -167,10 +172,6 @@
     <ProjectReference Include="..\ElConvertidor.Data\ElConvertidor.Data.csproj">
       <Project>{4f7c09c2-b17d-4184-88a9-7182083667bf}</Project>
       <Name>ElConvertidor.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ElConvertidor.Infrastructure\ElConvertidor.Infrastructure.csproj">
-      <Project>{c1bafcaa-758a-4b31-b34c-ebca200aff53}</Project>
-      <Name>ElConvertidor.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

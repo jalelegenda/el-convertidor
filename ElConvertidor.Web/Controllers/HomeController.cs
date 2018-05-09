@@ -6,20 +6,25 @@ using System.Web.Mvc;
 using System;
 using Newtonsoft.Json;
 using System.IO;
+using System.Net;
+using ElConvertidor.Core.Models;
 
 namespace ElConvertidor.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IImageProcessingService _tiffService;
-        private readonly ISessionService<ImagesViewModel> _imagesSessionService;
+        private readonly ISessionService<ISourceImage> _imagesSessionService;
+        private readonly IImageValidationService _imageValidationService;
 
         public HomeController(
             IImageProcessingService tiffService,
-            ISessionService<ImagesViewModel> imagesSessionService)
+            ISessionService<ISourceImage> imagesSessionService,
+            IImageValidationService imageValidationService)
         {
             _tiffService = tiffService;
             _imagesSessionService = imagesSessionService;
+            _imageValidationService = imageValidationService;
         }
 
         [HttpGet]
@@ -40,9 +45,11 @@ namespace ElConvertidor.Web.Controllers
         public ActionResult ConvertImages()
         {
             var images = _imagesSessionService.GetCollection();
+
             if(images == null)
             {
-                throw new Exception("Nothing to upload");
+                return new HttpStatusCodeResult(HttpStatusCode.RequestTimeout,
+                    "Your session has expired. Select images for conversion again, please.");
             }
 
             var imageStream = _tiffService.ConvertImagesToMultipageTiff(images);
@@ -51,15 +58,14 @@ namespace ElConvertidor.Web.Controllers
         }
 
         [HttpPost]
-        public bool AddImages(IEnumerable<ImagesViewModel> images)
+        public string AddImages(IEnumerable<ImagesViewModel> images)
         {
-            if (!ModelState.IsValid)
+            var validImages = _imageValidationService.ExtractActualImages(images);
+            if(validImages != null)
             {
-                return false;
+                _imagesSessionService.AddCollection(validImages);
             }
-
-            _imagesSessionService.AddCollection(images);
-            return true;
+            return JsonConvert.SerializeObject(validImages, Formatting.Indented);
         }
 
         [HttpPost]

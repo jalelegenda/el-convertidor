@@ -7,8 +7,8 @@
     <ProjectGuid>{C1BAFCAA-758A-4B31-B34C-EBCA200AFF53}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ElConvertidor.Infrastructure</RootNamespace>
-    <AssemblyName>ElConvertidor.Infrastructure</AssemblyName>
+    <RootNamespace>ElConvertidor.Business</RootNamespace>
+    <AssemblyName>ElConvertidor.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\ImageConversionService.cs" />
+    <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="ImageConversionService.cs" />
+    <Compile Include="ImageValidationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

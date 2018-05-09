@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\IImageValidationService.cs" />
     <Compile Include="Data\IConversionsStore.cs" />
     <Compile Include="Models\ISourceImage.cs" />
     <Compile Include="Infrastructure\IImageConversionService.cs" />

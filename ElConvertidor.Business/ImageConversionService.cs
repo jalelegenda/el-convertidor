@@ -7,7 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
-namespace ElConvertidor.Infrastructure
+namespace ElConvertidor.Business
 {
     public sealed class ImageProcessingService : IImageProcessingService
     {

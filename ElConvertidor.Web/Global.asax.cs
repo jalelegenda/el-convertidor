@@ -3,7 +3,7 @@ using System.Web.Routing;
 using ElConvertidor.Web;
 using Autofac;
 using Autofac.Integration.Mvc;
-using ElConvertidor.Infrastructure;
+using ElConvertidor.Business;
 using ElConvertidor.Core.Infrastructure;
 using ElConvertidor.Web.Services;
 using ElConvertidor.Core.Client;
@@ -23,11 +23,17 @@ namespace ElConvertidor
             builder.RegisterType<ImageProcessingService>()
                 .As<IImageProcessingService>()
                 .InstancePerLifetimeScope();
+
             builder.RegisterType<ConversionsStore>()
                 .As<IConversionsStore>()
                 .InstancePerLifetimeScope();
+
             builder.RegisterGeneric(typeof(SessionService<>))
                 .As(typeof(ISessionService<>))
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ImageValidationService>()
+                .As<IImageValidationService>()
                 .InstancePerLifetimeScope();
 
             var container = builder.Build();
