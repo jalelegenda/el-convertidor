@@ -95,12 +95,14 @@ export default function ImageFormViewModel() {
             credentials: 'include'
         })
             .then(handleErrors)
-            .then(res => {
-                self.images([]);
-                return res.blob();
+            .then(res => { self.images([]); return res.blob(); })
+            .then(blob => { 
+                let url = URL.createObjectURL(blob);
+                window.location.href = url;
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                }, 60000);
             })
-            .then(blob => { return URL.createObjectURL(blob); })
-            .then(url => { window.open(url, "_blank"); URL.revokeObjectURL(url); })
             .catch(addErrorAndReset);
     };
 
