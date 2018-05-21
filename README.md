@@ -8,7 +8,7 @@ A simple image converter, with the ability to convert .jpeg, .gif and .bmp image
 
 This project uses a modest tech stack:
 
-* uses pure CSS for style
+* vanilla CSS for style (frameworkless, transpilerless)
 * npm for front-end package management
 * webpack for bundling
 * knockout.js for front-end databinding and UI
